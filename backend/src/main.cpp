@@ -42,7 +42,8 @@ void sendError(httplib::Response& res, int status, const std::string& msg) {
 int main(int argc, char** argv) {
     // Usage: ./server [project_root] [port]      (defaults: .. and 8080)
     const std::string root = argc > 1 ? argv[1] : "..";
-    const int port = argc > 2 ? std::atoi(argv[2]) : 8080;
+    const char* portEnv = std::getenv("PORT");
+    const int port = argc > 2 ? std::atoi(argv[2]) : (portEnv ? std::atoi(portEnv) : 8080);
 
     Graph graph;
     try {
@@ -127,7 +128,7 @@ int main(int argc, char** argv) {
     });
 
     std::cout << "Serving on http://localhost:" << port << "  (Ctrl+C to stop)\n";
-    if (!svr.listen("127.0.0.1", port)) {
+    if (!svr.listen("0.0.0.0", port)) {
         std::cerr << "Could not listen on port " << port << " (already in use?)\n";
         return 1;
     }
