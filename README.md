@@ -16,7 +16,7 @@ Science and Engineering, KIIT (ground to 3rd floor). The route is computed in C+
 
 ## Run
     cd backend && make run
-Open http://localhost:8080
+Open https://campus-navigator-ncrg.onrender.com/
 
 ## How it works
 - `data/layout.json`: hand-built description of ONE floor (rooms, doors,
